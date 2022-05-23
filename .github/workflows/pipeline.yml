@@ -28,3 +28,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - uses: AkhileshNS/heroku-deploy
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: stark-woodland-88329
+          heroku_email: filip.stenbacka@gmail.com
