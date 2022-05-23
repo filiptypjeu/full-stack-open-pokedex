@@ -33,3 +33,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: stark-woodland-88329
           heroku_email: filip.stenbacka@gmail.com
+          healthcheck: https://stark-woodland-88329.herokuapp.com/health
+          checkstring: ok
+          delay: 2
+          procfile: "web: npm run start-prod"
+
