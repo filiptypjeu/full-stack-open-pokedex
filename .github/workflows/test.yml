@@ -16,9 +16,9 @@ jobs:
         run: echo "$OUTPUT"
       - name: contains skip
         env:
-          OUTPUT: ${{ contains(join(toJSON(github.event.commits.*.message)), "#skip") }}
+          OUTPUT: "${{ contains(join(toJSON(github.event.commits.*.message)), '#skip') }}"
         run: echo "$OUTPUT"
       - name: not contains skip
         env:
-          OUTPUT: ${{ !contains(join(toJSON(github.event.commits.*.message)), "#skip") }}
+          OUTPUT: "${{ !contains(join(toJSON(github.event.commits.*.message)), '#skip') }}"
         run: echo "$OUTPUT"
