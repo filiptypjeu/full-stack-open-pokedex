@@ -36,5 +36,5 @@ jobs:
           healthcheck: https://stark-woodland-88329.herokuapp.com/health
           checkstring: ok
           delay: 2
-          procfile: "web: npm run start-pro"
+          procfile: "web: npm run start-prod"
           rollbackonhealthcheckfailed: true
