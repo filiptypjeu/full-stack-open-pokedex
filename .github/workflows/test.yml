@@ -9,16 +9,16 @@ jobs:
   a_test_job:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - name: gihub context
+      - uses: actions/checkout@v3
+      - name: join commit messages
         env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
+          OUTPUT: ${{ join(toJSON(github.event.commits.*.message)) }}
+        run: echo "$OUTPUT"
+      - name: contains skip
         env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
+          OUTPUT: ${{ contains(join(toJSON(github.event.commits.*.message)), "#skip") }}
+        run: echo "$OUTPUT"
+      - name: not contains skip
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+          OUTPUT: ${{ !contains(join(toJSON(github.event.commits.*.message)), "#skip") }}
+        run: echo "$OUTPUT"
