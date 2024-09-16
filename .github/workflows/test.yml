@@ -1,0 +1,24 @@
+name: Testing stuff
+
+on:
+  push:
+    branches:
+      - workflow-test
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: join commit messages
+        env:
+          OUTPUT: ${{ join(toJSON(github.event.commits.*.message)) }}
+        run: echo "$OUTPUT"
+      - name: contains skip
+        env:
+          OUTPUT: "${{ contains(join(toJSON(github.event.commits.*.message)), '#skip') }}"
+        run: echo "$OUTPUT"
+      - name: not contains skip
+        env:
+          OUTPUT: "${{ !contains(join(toJSON(github.event.commits.*.message)), '#skip') }}"
+        run: echo "$OUTPUT"
